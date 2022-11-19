@@ -2,6 +2,8 @@
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
+using System.Data.Entity.Validation;
+using System.Diagnostics;
 using System.Drawing;
 using System.Linq;
 using System.Reflection.Metadata;
@@ -18,7 +20,7 @@ namespace hora_Komdelli
         public Form1()
         {
             InitializeComponent();
-
+            //corte planejado
             textBox22.Enabled = false;
             textBox21.Enabled = false;
             textBox20.Enabled = false;
@@ -30,7 +32,7 @@ namespace hora_Komdelli
             textBox14.Enabled = false;
             textBox13.Enabled = false;
             textBox12.Enabled = false;
-
+            //o.p planejado
             textBox44.Enabled = false;
             textBox43.Enabled = false;
             textBox42.Enabled = false;
@@ -114,9 +116,12 @@ namespace hora_Komdelli
         #endregion
         private void button1_Click(object sender, EventArgs e)
         {
-            using (var Db = new Conexao())
+            #region conexão,salvando bancode dados
+
+            var Db = new Conexao();
             {
-                Db.corte_Executados.Add(new Corte_executado
+               // var teste = new Corte_executado()
+               Db.corte_Executados.AddRangeAsync(new Corte_executado
                 {
                     primeiro = textBox1.Text,
                     segundo = textBox2.Text,
@@ -130,10 +135,75 @@ namespace hora_Komdelli
                     decimo = textBox10.Text,
                     decimo_primeiro = textBox11.Text
                 });
-                Db.SaveChanges();
+
+                Db.corte_Planejados.Add(new Corte_planejado
+                {
+                    primeiro = textBox22.Text,
+                    segundo = textBox21.Text,
+                    terceiro = textBox20.Text,
+                    quarto = textBox19.Text,
+                    quinto = textBox18.Text,
+                    sexto = textBox17.Text,
+                    setimo = textBox16.Text,
+                    oitavo = textBox15.Text,
+                    nono = textBox14.Text,
+                    decimo = textBox13.Text,
+                    decimo_primeiro = textBox12.Text
+                });
+                Db.op_Executados.Add(new Op_executado
+                {
+                    primeiro = textBox33.Text,
+                    segundo = textBox32.Text,
+                    terceiro = textBox31.Text,
+                    quarto = textBox30.Text,
+                    quinto = textBox29.Text,
+                    sexto = textBox28.Text,
+                    setimo = textBox27.Text,
+                    oitavo = textBox26.Text,
+                    nono = textBox25.Text,
+                    decimo = textBox24.Text,
+                    decimo_primeiro = textBox23.Text
+                });
+                Db.op_Planejados.Add(new Op_planejado
+                {
+                    primeiro = textBox44.Text,
+                    segundo = textBox43.Text,
+                    terceiro = textBox42.Text,
+                    quarto = textBox41.Text,
+                    quinto = textBox40.Text,
+                    sexto = textBox39.Text,
+                    setimo = textBox38.Text,
+                    oitavo = textBox37.Text,
+                    nono = textBox36.Text,
+                    decimo = textBox35.Text,
+                    decimo_primeiro = textBox34.Text
+                });
+                // Db.SaveChanges();
+                //MessageBox.Show("item salvos");
+                try
+                {
+                    Db.SaveChanges();
+                }
+                catch (DbEntityValidationException dbEx)
+                {
+                    foreach (var validationErrors in dbEx.EntityValidationErrors)
+                    {
+                        foreach (var validationError in validationErrors.ValidationErrors)
+                        {
+                            Debug.WriteLine("Property: {0} Error: {1}", validationError.PropertyName, validationError.ErrorMessage);
+                        }
+                    }
+                }
             }
+           
+            MessageBox.Show("dados salvos");
+
+            #endregion
+
+
         }
 
+       
     }
 
 }

@@ -116,6 +116,7 @@ namespace hora_Komdelli
             this.toolStripButton1 = new System.Windows.Forms.ToolStripButton();
             this.toolStripButton2 = new System.Windows.Forms.ToolStripButton();
             this.openFileDialog1 = new System.Windows.Forms.OpenFileDialog();
+            this.button3 = new System.Windows.Forms.Button();
             this.tabControl1.SuspendLayout();
             this.INFORMAÇÃO.SuspendLayout();
             this.groupBox2.SuspendLayout();
@@ -357,6 +358,7 @@ namespace hora_Komdelli
             // 
             // panel1
             // 
+            this.panel1.Controls.Add(this.button3);
             this.panel1.Controls.Add(this.button2);
             this.panel1.Controls.Add(this.button1);
             this.panel1.Controls.Add(this.Abrir_plano);
@@ -956,6 +958,15 @@ namespace hora_Komdelli
             this.openFileDialog1.FileName = "openFileDialog1";
             this.openFileDialog1.Filter = "Arquivos do Excel|*.xlsx;*.xlsm;*.xlsb;*.xls;*‌​.xml;\"";
             // 
+            // button3
+            // 
+            this.button3.Location = new System.Drawing.Point(301, 2);
+            this.button3.Name = "button3";
+            this.button3.Size = new System.Drawing.Size(75, 23);
+            this.button3.TabIndex = 3;
+            this.button3.Text = "EXCLUIR";
+            this.button3.UseVisualStyleBackColor = true;
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
@@ -963,7 +974,7 @@ namespace hora_Komdelli
             this.ClientSize = new System.Drawing.Size(800, 463);
             this.Controls.Add(this.tabControl1);
             this.Name = "Form1";
-            this.Text = "Form1";
+            this.Text = "horaxhora";
             this.tabControl1.ResumeLayout(false);
             this.INFORMAÇÃO.ResumeLayout(false);
             this.groupBox2.ResumeLayout(false);
@@ -1074,8 +1085,8 @@ namespace hora_Komdelli
         private System.Windows.Forms.Label lab_diferença;
         private System.Windows.Forms.Label lab_planejado;
         private System.Windows.Forms.Label lab_executado;
-        private Microsoft.Data.Sqlite.SqliteConnection sqliteConnection1;
         private System.Windows.Forms.Button button2;
+        private System.Windows.Forms.Button button3;
     }
 }
 

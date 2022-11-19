@@ -21,19 +21,31 @@ namespace hora_Komdelli
             Application.SetCompatibleTextRenderingDefault(false);
             Application.Run(new Form1());
 
-            using (var context = new Conexao())
-            {
+            //using (var context = new Conexao())
+            //{
 
-                // Migrate the database
-                //context.Database.EnsureCreated();
-            }
-
+            //    // Migrate the database
+            //    //context.Database.EnsureCreated();
+            //}
+            #region conexao e salvando no banco
             //using (var db = new Conexao())
             //{
-            //    db.corte_Executados.Add(new Corte_executado { primeiro = "1020", segundo = "123", terceiro = "1234", quarto = "12345", quinto = "12", sexto = "1232", setimo = "321", oitavo = "423", nono = "213", decimo = "543" });
-            //    db.SaveChanges();
+            //     db.corte_Executados.AddRange(new Corte_executado ()
+            //     { 
+            //         primeiro = "1020", 
+            //         segundo = "123", 
+            //         terceiro = "1234", 
+            //         quarto = "12345", 
+            //         quinto = "12",
+            //         sexto = "1232", 
+            //         setimo = "321", 
+            //         oitavo = "423",
+            //         nono = "213",
+            //         decimo = "543" 
+            //     });
+            //     db.SaveChanges();
             //}
-
+            #endregion
 
         }
     }
