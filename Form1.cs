@@ -116,7 +116,7 @@ namespace hora_Komdelli
         #endregion
         private void button1_Click(object sender, EventArgs e)
         {
-            #region conexão,salvando bancode dados
+            #region conexão,salvando banco de dados
 
             var Db = new Conexao();
             {
