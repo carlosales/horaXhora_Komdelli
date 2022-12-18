@@ -121,7 +121,7 @@ namespace hora_Komdelli
             var Db = new Conexao();
             {
                // var teste = new Corte_executado()
-               Db.corte_Executados.AddRangeAsync(new Corte_executado
+               Db.corte_Executados.Add(new Corte_executado
                 {
                     primeiro = textBox1.Text,
                     segundo = textBox2.Text,
@@ -196,7 +196,6 @@ namespace hora_Komdelli
                 }
             }
            
-            MessageBox.Show("dados salvos");
 
             #endregion
 
