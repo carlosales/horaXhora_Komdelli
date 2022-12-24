@@ -121,7 +121,7 @@ namespace hora_Komdelli
             var Db = new Conexao();
             {
                // var teste = new Corte_executado()
-               Db.corte_Executados.Add(new Corte_executado
+               Db.corte_Executados.AddAsync(new Corte_executado
                 {
                     primeiro = textBox1.Text,
                     segundo = textBox2.Text,
@@ -136,7 +136,7 @@ namespace hora_Komdelli
                     decimo_primeiro = textBox11.Text
                 });
 
-                Db.corte_Planejados.Add(new Corte_planejado
+                Db.corte_Planejados.AddAsync(new Corte_planejado
                 {
                     primeiro = textBox22.Text,
                     segundo = textBox21.Text,
@@ -150,7 +150,7 @@ namespace hora_Komdelli
                     decimo = textBox13.Text,
                     decimo_primeiro = textBox12.Text
                 });
-                Db.op_Executados.Add(new Op_executado
+                Db.op_Executados.AddAsync(new Op_executado
                 {
                     primeiro = textBox33.Text,
                     segundo = textBox32.Text,
@@ -164,7 +164,8 @@ namespace hora_Komdelli
                     decimo = textBox24.Text,
                     decimo_primeiro = textBox23.Text
                 });
-                Db.op_Planejados.Add(new Op_planejado
+
+                Db.op_Planejados.AddAsync(new Op_planejado
                 {
                     primeiro = textBox44.Text,
                     segundo = textBox43.Text,
@@ -178,21 +179,15 @@ namespace hora_Komdelli
                     decimo = textBox35.Text,
                     decimo_primeiro = textBox34.Text
                 });
-                // Db.SaveChanges();
-                //MessageBox.Show("item salvos");
+               
                 try
                 {
-                    Db.SaveChanges();
+                    Db.SaveChangesAsync();
+                    MessageBox.Show("salvo com sucesso");
                 }
-                catch (DbEntityValidationException dbEx)
+                catch (Exception E)
                 {
-                    foreach (var validationErrors in dbEx.EntityValidationErrors)
-                    {
-                        foreach (var validationError in validationErrors.ValidationErrors)
-                        {
-                            Debug.WriteLine("Property: {0} Error: {1}", validationError.PropertyName, validationError.ErrorMessage);
-                        }
-                    }
+                    MessageBox.Show("problema ao salvar"+ E);
                 }
             }
            
@@ -202,7 +197,13 @@ namespace hora_Komdelli
 
         }
 
-       
+        private void button2_Click(object sender, EventArgs e)
+        {
+            var con = new Conexao();
+            con.
+
+
+        }
     }
 
 }
