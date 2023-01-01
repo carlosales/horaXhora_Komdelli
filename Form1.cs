@@ -209,6 +209,19 @@ namespace hora_Komdelli
 
 
     }
+
+        private void button3_Click(object sender, EventArgs e)
+        {
+            using (var context = new Conexao())
+            {
+                var std = context.corte_Executados.First<Corte_executado>();
+                context.corte_Executados.Remove(std);
+
+                
+
+                context.SaveChanges();
+            }
+        }
     }
 
 }
