@@ -199,11 +199,16 @@ namespace hora_Komdelli
 
         private void button2_Click(object sender, EventArgs e)
         {
-            var con = new Conexao();
-            con.
-
-
+            var conex = new Conexao();
+         {
+             conex.corte_Executados.First<Corte_executado>();
+            conex.corte_Executados.Find(corte_executado);
+            conex.SaveChanges();
         }
+
+
+
+    }
     }
 
 }
