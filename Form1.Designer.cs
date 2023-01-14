@@ -29,7 +29,14 @@ namespace hora_Komdelli
         /// </summary>
         private void InitializeComponent()
         {
+            System.Windows.Forms.ListView listView1;
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Form1));
+            this.horas_inicial = new System.Windows.Forms.ColumnHeader();
+            this.horas_final = new System.Windows.Forms.ColumnHeader();
+            this.processos = new System.Windows.Forms.ColumnHeader();
+            this.ordem_produção = new System.Windows.Forms.ColumnHeader();
+            this.justificativas = new System.Windows.Forms.ColumnHeader();
+            this.duração = new System.Windows.Forms.ColumnHeader();
             this.tabControl1 = new System.Windows.Forms.TabControl();
             this.INFORMAÇÃO = new System.Windows.Forms.TabPage();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
@@ -98,25 +105,33 @@ namespace hora_Komdelli
             this.label2 = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
             this.PRODUTIVIDADE = new System.Windows.Forms.TabPage();
+            this.comboBox1 = new System.Windows.Forms.ComboBox();
+            this.textBox50 = new System.Windows.Forms.TextBox();
+            this.textBox48 = new System.Windows.Forms.TextBox();
+            this.textBox47 = new System.Windows.Forms.TextBox();
+            this.textBox46 = new System.Windows.Forms.TextBox();
+            this.textBox45 = new System.Windows.Forms.TextBox();
+            this.label22 = new System.Windows.Forms.Label();
+            this.label21 = new System.Windows.Forms.Label();
+            this.label20 = new System.Windows.Forms.Label();
+            this.label19 = new System.Windows.Forms.Label();
+            this.label18 = new System.Windows.Forms.Label();
+            this.label17 = new System.Windows.Forms.Label();
             this.groupBox3 = new System.Windows.Forms.GroupBox();
+            this.label16 = new System.Windows.Forms.Label();
+            this.label15 = new System.Windows.Forms.Label();
             this.lab_diferença = new System.Windows.Forms.Label();
             this.lab_planejado = new System.Windows.Forms.Label();
-            this.lab_executado = new System.Windows.Forms.Label();
             this.label14 = new System.Windows.Forms.Label();
             this.label13 = new System.Windows.Forms.Label();
             this.label12 = new System.Windows.Forms.Label();
-            this.listView1 = new System.Windows.Forms.ListView();
-            this.horas_inicial = new System.Windows.Forms.ColumnHeader();
-            this.horas_final = new System.Windows.Forms.ColumnHeader();
-            this.processos = new System.Windows.Forms.ColumnHeader();
-            this.ordem_produção = new System.Windows.Forms.ColumnHeader();
-            this.justificativas = new System.Windows.Forms.ColumnHeader();
-            this.duração = new System.Windows.Forms.ColumnHeader();
             this.toolStrip1 = new System.Windows.Forms.ToolStrip();
-            this.toolStripProgressBar1 = new System.Windows.Forms.ToolStripProgressBar();
-            this.toolStripButton1 = new System.Windows.Forms.ToolStripButton();
-            this.toolStripButton2 = new System.Windows.Forms.ToolStripButton();
+            this.Salvar = new System.Windows.Forms.ToolStripButton();
+            this.Alterar = new System.Windows.Forms.ToolStripButton();
             this.openFileDialog1 = new System.Windows.Forms.OpenFileDialog();
+            this.Sair = new System.Windows.Forms.ToolStripButton();
+            this.Excluir = new System.Windows.Forms.ToolStripButton();
+            listView1 = new System.Windows.Forms.ListView();
             this.tabControl1.SuspendLayout();
             this.INFORMAÇÃO.SuspendLayout();
             this.groupBox2.SuspendLayout();
@@ -129,6 +144,67 @@ namespace hora_Komdelli
             this.groupBox3.SuspendLayout();
             this.toolStrip1.SuspendLayout();
             this.SuspendLayout();
+            // 
+            // listView1
+            // 
+            listView1.BackColor = System.Drawing.SystemColors.ControlLight;
+            listView1.BackgroundImageTiled = true;
+            listView1.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            listView1.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
+            this.horas_inicial,
+            this.horas_final,
+            this.processos,
+            this.ordem_produção,
+            this.justificativas,
+            this.duração});
+            listView1.Dock = System.Windows.Forms.DockStyle.Bottom;
+            listView1.Font = new System.Drawing.Font("Arial", 9F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Underline))), System.Drawing.GraphicsUnit.Point);
+            listView1.FullRowSelect = true;
+            listView1.GridLines = true;
+            listView1.HideSelection = false;
+            listView1.ImeMode = System.Windows.Forms.ImeMode.AlphaFull;
+            listView1.LabelEdit = true;
+            listView1.Location = new System.Drawing.Point(3, 210);
+            listView1.Name = "listView1";
+            listView1.Size = new System.Drawing.Size(786, 197);
+            listView1.TabIndex = 1;
+            listView1.UseCompatibleStateImageBehavior = false;
+            listView1.View = System.Windows.Forms.View.Details;
+            // 
+            // horas_inicial
+            // 
+            this.horas_inicial.Text = "horas incial";
+            this.horas_inicial.Width = 90;
+            // 
+            // horas_final
+            // 
+            this.horas_final.Text = "horas final";
+            this.horas_final.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            this.horas_final.Width = 90;
+            // 
+            // processos
+            // 
+            this.processos.Text = "processos";
+            this.processos.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            this.processos.Width = 90;
+            // 
+            // ordem_produção
+            // 
+            this.ordem_produção.Text = "ordem produção";
+            this.ordem_produção.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            this.ordem_produção.Width = 120;
+            // 
+            // justificativas
+            // 
+            this.justificativas.Text = "justificativas";
+            this.justificativas.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            this.justificativas.Width = 130;
+            // 
+            // duração
+            // 
+            this.duração.Text = "duração";
+            this.duração.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            this.duração.Width = 80;
             // 
             // tabControl1
             // 
@@ -783,8 +859,20 @@ namespace hora_Komdelli
             // 
             this.PRODUTIVIDADE.AutoScroll = true;
             this.PRODUTIVIDADE.BackColor = System.Drawing.Color.DarkGray;
+            this.PRODUTIVIDADE.Controls.Add(this.comboBox1);
+            this.PRODUTIVIDADE.Controls.Add(this.textBox50);
+            this.PRODUTIVIDADE.Controls.Add(this.textBox48);
+            this.PRODUTIVIDADE.Controls.Add(this.textBox47);
+            this.PRODUTIVIDADE.Controls.Add(this.textBox46);
+            this.PRODUTIVIDADE.Controls.Add(this.textBox45);
+            this.PRODUTIVIDADE.Controls.Add(this.label22);
+            this.PRODUTIVIDADE.Controls.Add(this.label21);
+            this.PRODUTIVIDADE.Controls.Add(this.label20);
+            this.PRODUTIVIDADE.Controls.Add(this.label19);
+            this.PRODUTIVIDADE.Controls.Add(this.label18);
+            this.PRODUTIVIDADE.Controls.Add(this.label17);
             this.PRODUTIVIDADE.Controls.Add(this.groupBox3);
-            this.PRODUTIVIDADE.Controls.Add(this.listView1);
+            this.PRODUTIVIDADE.Controls.Add(listView1);
             this.PRODUTIVIDADE.Controls.Add(this.toolStrip1);
             this.PRODUTIVIDADE.Location = new System.Drawing.Point(4, 4);
             this.PRODUTIVIDADE.Name = "PRODUTIVIDADE";
@@ -793,26 +881,156 @@ namespace hora_Komdelli
             this.PRODUTIVIDADE.TabIndex = 1;
             this.PRODUTIVIDADE.Text = "PRODUTIVIDADE";
             // 
+            // comboBox1
+            // 
+            this.comboBox1.FlatStyle = System.Windows.Forms.FlatStyle.System;
+            this.comboBox1.FormattingEnabled = true;
+            this.comboBox1.Items.AddRange(new object[] {
+            "ACUMULO DE FILETAGEM",
+            "INICIO PRODUÇÃO",
+            "FINAL PRODUÇÃO",
+            "PARADA PARA ALMOÇO",
+            "RETORNO DO ALMOÇO",
+            "MANUTENÇÃO HOPPER",
+            "MANUTENÇÃO FILETAGEM",
+            "PARADA HOPPER",
+            "PARADA FILETAGEM"});
+            this.comboBox1.Location = new System.Drawing.Point(240, 26);
+            this.comboBox1.Name = "comboBox1";
+            this.comboBox1.Size = new System.Drawing.Size(171, 23);
+            this.comboBox1.TabIndex = 15;
+            // 
+            // textBox50
+            // 
+            this.textBox50.CharacterCasing = System.Windows.Forms.CharacterCasing.Upper;
+            this.textBox50.ImeMode = System.Windows.Forms.ImeMode.On;
+            this.textBox50.Location = new System.Drawing.Point(240, 80);
+            this.textBox50.Multiline = true;
+            this.textBox50.Name = "textBox50";
+            this.textBox50.Size = new System.Drawing.Size(170, 23);
+            this.textBox50.TabIndex = 14;
+            // 
+            // textBox48
+            // 
+            this.textBox48.Location = new System.Drawing.Point(8, 181);
+            this.textBox48.Name = "textBox48";
+            this.textBox48.Size = new System.Drawing.Size(164, 23);
+            this.textBox48.TabIndex = 12;
+            // 
+            // textBox47
+            // 
+            this.textBox47.Location = new System.Drawing.Point(8, 134);
+            this.textBox47.Name = "textBox47";
+            this.textBox47.Size = new System.Drawing.Size(162, 23);
+            this.textBox47.TabIndex = 11;
+            // 
+            // textBox46
+            // 
+            this.textBox46.Location = new System.Drawing.Point(8, 78);
+            this.textBox46.Name = "textBox46";
+            this.textBox46.Size = new System.Drawing.Size(162, 23);
+            this.textBox46.TabIndex = 10;
+            // 
+            // textBox45
+            // 
+            this.textBox45.Location = new System.Drawing.Point(8, 22);
+            this.textBox45.Name = "textBox45";
+            this.textBox45.Size = new System.Drawing.Size(160, 23);
+            this.textBox45.TabIndex = 9;
+            // 
+            // label22
+            // 
+            this.label22.AutoSize = true;
+            this.label22.Location = new System.Drawing.Point(240, 58);
+            this.label22.Name = "label22";
+            this.label22.Size = new System.Drawing.Size(50, 15);
+            this.label22.TabIndex = 8;
+            this.label22.Text = "duração";
+            // 
+            // label21
+            // 
+            this.label21.AutoSize = true;
+            this.label21.Location = new System.Drawing.Point(240, 4);
+            this.label21.Name = "label21";
+            this.label21.Size = new System.Drawing.Size(72, 15);
+            this.label21.TabIndex = 7;
+            this.label21.Text = "justificativas";
+            // 
+            // label20
+            // 
+            this.label20.AutoSize = true;
+            this.label20.Location = new System.Drawing.Point(8, 163);
+            this.label20.Name = "label20";
+            this.label20.Size = new System.Drawing.Size(96, 15);
+            this.label20.TabIndex = 6;
+            this.label20.Text = "ordem Produção";
+            // 
+            // label19
+            // 
+            this.label19.AutoSize = true;
+            this.label19.Location = new System.Drawing.Point(8, 116);
+            this.label19.Name = "label19";
+            this.label19.Size = new System.Drawing.Size(59, 15);
+            this.label19.TabIndex = 5;
+            this.label19.Text = "processos";
+            // 
+            // label18
+            // 
+            this.label18.AutoSize = true;
+            this.label18.Location = new System.Drawing.Point(8, 58);
+            this.label18.Name = "label18";
+            this.label18.Size = new System.Drawing.Size(62, 15);
+            this.label18.TabIndex = 4;
+            this.label18.Text = "horas final";
+            // 
+            // label17
+            // 
+            this.label17.AutoSize = true;
+            this.label17.Location = new System.Drawing.Point(8, 5);
+            this.label17.Name = "label17";
+            this.label17.Size = new System.Drawing.Size(65, 15);
+            this.label17.TabIndex = 3;
+            this.label17.Text = "hora inicial";
+            // 
             // groupBox3
             // 
+            this.groupBox3.Controls.Add(this.label16);
+            this.groupBox3.Controls.Add(this.label15);
             this.groupBox3.Controls.Add(this.lab_diferença);
             this.groupBox3.Controls.Add(this.lab_planejado);
-            this.groupBox3.Controls.Add(this.lab_executado);
             this.groupBox3.Controls.Add(this.label14);
             this.groupBox3.Controls.Add(this.label13);
             this.groupBox3.Controls.Add(this.label12);
             this.groupBox3.Dock = System.Windows.Forms.DockStyle.Right;
-            this.groupBox3.Location = new System.Drawing.Point(554, 3);
+            this.groupBox3.Location = new System.Drawing.Point(583, 3);
             this.groupBox3.Name = "groupBox3";
-            this.groupBox3.Size = new System.Drawing.Size(235, 214);
+            this.groupBox3.Size = new System.Drawing.Size(206, 207);
             this.groupBox3.TabIndex = 2;
             this.groupBox3.TabStop = false;
             this.groupBox3.Text = "Resultado detalhado";
             // 
+            // label16
+            // 
+            this.label16.AutoSize = true;
+            this.label16.Location = new System.Drawing.Point(147, 114);
+            this.label16.Name = "label16";
+            this.label16.Size = new System.Drawing.Size(44, 15);
+            this.label16.TabIndex = 7;
+            this.label16.Text = "label16";
+            // 
+            // label15
+            // 
+            this.label15.AutoSize = true;
+            this.label15.Location = new System.Drawing.Point(147, 71);
+            this.label15.Name = "label15";
+            this.label15.Size = new System.Drawing.Size(44, 15);
+            this.label15.TabIndex = 6;
+            this.label15.Text = "label15";
+            // 
             // lab_diferença
             // 
             this.lab_diferença.AutoSize = true;
-            this.lab_diferença.Location = new System.Drawing.Point(145, 163);
+            this.lab_diferença.Location = new System.Drawing.Point(147, 160);
             this.lab_diferença.Name = "lab_diferença";
             this.lab_diferença.Size = new System.Drawing.Size(44, 15);
             this.lab_diferença.TabIndex = 5;
@@ -821,34 +1039,25 @@ namespace hora_Komdelli
             // lab_planejado
             // 
             this.lab_planejado.AutoSize = true;
-            this.lab_planejado.Location = new System.Drawing.Point(147, 100);
+            this.lab_planejado.Location = new System.Drawing.Point(150, 114);
             this.lab_planejado.Name = "lab_planejado";
-            this.lab_planejado.Size = new System.Drawing.Size(44, 15);
+            this.lab_planejado.Size = new System.Drawing.Size(10, 15);
             this.lab_planejado.TabIndex = 4;
-            this.lab_planejado.Text = "label16";
-            // 
-            // lab_executado
-            // 
-            this.lab_executado.AutoSize = true;
-            this.lab_executado.Location = new System.Drawing.Point(144, 39);
-            this.lab_executado.Name = "lab_executado";
-            this.lab_executado.Size = new System.Drawing.Size(44, 15);
-            this.lab_executado.TabIndex = 3;
-            this.lab_executado.Text = "label15";
+            this.lab_planejado.Text = " ";
             // 
             // label14
             // 
             this.label14.AutoSize = true;
-            this.label14.Location = new System.Drawing.Point(25, 160);
+            this.label14.Location = new System.Drawing.Point(28, 160);
             this.label14.Name = "label14";
-            this.label14.Size = new System.Drawing.Size(59, 15);
+            this.label14.Size = new System.Drawing.Size(104, 15);
             this.label14.TabIndex = 2;
-            this.label14.Text = "diferença:";
+            this.label14.Text = "Saldo Acumulado:";
             // 
             // label13
             // 
             this.label13.AutoSize = true;
-            this.label13.Location = new System.Drawing.Point(25, 99);
+            this.label13.Location = new System.Drawing.Point(28, 113);
             this.label13.Name = "label13";
             this.label13.Size = new System.Drawing.Size(86, 15);
             this.label13.TabIndex = 1;
@@ -857,81 +1066,21 @@ namespace hora_Komdelli
             // label12
             // 
             this.label12.AutoSize = true;
-            this.label12.Location = new System.Drawing.Point(25, 39);
+            this.label12.Location = new System.Drawing.Point(28, 71);
             this.label12.Name = "label12";
             this.label12.Size = new System.Drawing.Size(92, 15);
             this.label12.TabIndex = 0;
             this.label12.Text = "total executado:";
-            // 
-            // listView1
-            // 
-            this.listView1.Alignment = System.Windows.Forms.ListViewAlignment.SnapToGrid;
-            this.listView1.BackColor = System.Drawing.SystemColors.ControlLight;
-            this.listView1.BackgroundImageTiled = true;
-            this.listView1.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
-            this.horas_inicial,
-            this.horas_final,
-            this.processos,
-            this.ordem_produção,
-            this.justificativas,
-            this.duração});
-            this.listView1.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.listView1.Font = new System.Drawing.Font("Arial", 9F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Underline))), System.Drawing.GraphicsUnit.Point);
-            this.listView1.FullRowSelect = true;
-            this.listView1.GridLines = true;
-            this.listView1.HideSelection = false;
-            this.listView1.ImeMode = System.Windows.Forms.ImeMode.AlphaFull;
-            this.listView1.LabelEdit = true;
-            this.listView1.Location = new System.Drawing.Point(3, 217);
-            this.listView1.Name = "listView1";
-            this.listView1.Size = new System.Drawing.Size(786, 190);
-            this.listView1.TabIndex = 1;
-            this.listView1.UseCompatibleStateImageBehavior = false;
-            this.listView1.View = System.Windows.Forms.View.Details;
-            // 
-            // horas_inicial
-            // 
-            this.horas_inicial.Text = "horas incial";
-            this.horas_inicial.Width = 90;
-            // 
-            // horas_final
-            // 
-            this.horas_final.Text = "horas final";
-            this.horas_final.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
-            this.horas_final.Width = 90;
-            // 
-            // processos
-            // 
-            this.processos.Text = "processos";
-            this.processos.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
-            this.processos.Width = 90;
-            // 
-            // ordem_produção
-            // 
-            this.ordem_produção.Text = "ordem produção";
-            this.ordem_produção.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
-            this.ordem_produção.Width = 120;
-            // 
-            // justificativas
-            // 
-            this.justificativas.Text = "justificativas";
-            this.justificativas.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
-            this.justificativas.Width = 130;
-            // 
-            // duração
-            // 
-            this.duração.Text = "duração";
-            this.duração.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
-            this.duração.Width = 80;
             // 
             // toolStrip1
             // 
             this.toolStrip1.Dock = System.Windows.Forms.DockStyle.Bottom;
             this.toolStrip1.GripStyle = System.Windows.Forms.ToolStripGripStyle.Hidden;
             this.toolStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.toolStripProgressBar1,
-            this.toolStripButton1,
-            this.toolStripButton2});
+            this.Sair,
+            this.Alterar,
+            this.Salvar,
+            this.Excluir});
             this.toolStrip1.Location = new System.Drawing.Point(3, 407);
             this.toolStrip1.Name = "toolStrip1";
             this.toolStrip1.RenderMode = System.Windows.Forms.ToolStripRenderMode.Professional;
@@ -939,35 +1088,50 @@ namespace hora_Komdelli
             this.toolStrip1.TabIndex = 0;
             this.toolStrip1.Text = "toolStrip1";
             // 
-            // toolStripProgressBar1
+            // Salvar
             // 
-            this.toolStripProgressBar1.Alignment = System.Windows.Forms.ToolStripItemAlignment.Right;
-            this.toolStripProgressBar1.BackColor = System.Drawing.Color.RosyBrown;
-            this.toolStripProgressBar1.Name = "toolStripProgressBar1";
-            this.toolStripProgressBar1.Size = new System.Drawing.Size(100, 22);
+            this.Salvar.Alignment = System.Windows.Forms.ToolStripItemAlignment.Right;
+            this.Salvar.Image = ((System.Drawing.Image)(resources.GetObject("Salvar.Image")));
+            this.Salvar.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.Salvar.Name = "Salvar";
+            this.Salvar.Size = new System.Drawing.Size(57, 22);
+            this.Salvar.Text = "salvar";
             // 
-            // toolStripButton1
+            // Alterar
             // 
-            this.toolStripButton1.Alignment = System.Windows.Forms.ToolStripItemAlignment.Right;
-            this.toolStripButton1.Image = ((System.Drawing.Image)(resources.GetObject("toolStripButton1.Image")));
-            this.toolStripButton1.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.toolStripButton1.Name = "toolStripButton1";
-            this.toolStripButton1.Size = new System.Drawing.Size(57, 22);
-            this.toolStripButton1.Text = "salvar";
-            // 
-            // toolStripButton2
-            // 
-            this.toolStripButton2.Alignment = System.Windows.Forms.ToolStripItemAlignment.Right;
-            this.toolStripButton2.Image = ((System.Drawing.Image)(resources.GetObject("toolStripButton2.Image")));
-            this.toolStripButton2.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.toolStripButton2.Name = "toolStripButton2";
-            this.toolStripButton2.Size = new System.Drawing.Size(60, 22);
-            this.toolStripButton2.Text = "alterar";
+            this.Alterar.Alignment = System.Windows.Forms.ToolStripItemAlignment.Right;
+            this.Alterar.Image = ((System.Drawing.Image)(resources.GetObject("Alterar.Image")));
+            this.Alterar.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.Alterar.Name = "Alterar";
+            this.Alterar.Size = new System.Drawing.Size(60, 22);
+            this.Alterar.Text = "alterar";
             // 
             // openFileDialog1
             // 
             this.openFileDialog1.FileName = "openFileDialog1";
             this.openFileDialog1.Filter = "Arquivos do Excel|*.xlsx;*.xlsm;*.xlsb;*.xls;*‌​.xml;\"";
+            // 
+            // Sair
+            // 
+            this.Sair.Alignment = System.Windows.Forms.ToolStripItemAlignment.Right;
+            this.Sair.Image = ((System.Drawing.Image)(resources.GetObject("Sair.Image")));
+            this.Sair.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.Sair.Name = "Sair";
+            this.Sair.Size = new System.Drawing.Size(46, 22);
+            this.Sair.Text = "exit";
+            this.Sair.TextDirection = System.Windows.Forms.ToolStripTextDirection.Horizontal;
+            // 
+            // Excluir
+            // 
+            this.Excluir.Alignment = System.Windows.Forms.ToolStripItemAlignment.Right;
+            this.Excluir.Checked = true;
+            this.Excluir.CheckState = System.Windows.Forms.CheckState.Indeterminate;
+            this.Excluir.Image = ((System.Drawing.Image)(resources.GetObject("Excluir.Image")));
+            this.Excluir.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
+            this.Excluir.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.Excluir.Name = "Excluir";
+            this.Excluir.Size = new System.Drawing.Size(62, 22);
+            this.Excluir.Text = "excluir";
             // 
             // Form1
             // 
@@ -1071,13 +1235,12 @@ namespace hora_Komdelli
         private System.Windows.Forms.Button button1;
         private System.Windows.Forms.ListView listView1;
         private System.Windows.Forms.ToolStrip toolStrip1;
-        private System.Windows.Forms.ToolStripProgressBar toolStripProgressBar1;
         private System.Windows.Forms.GroupBox groupBox3;
         private System.Windows.Forms.Label label14;
         private System.Windows.Forms.Label label13;
         private System.Windows.Forms.Label label12;
-        private System.Windows.Forms.ToolStripButton toolStripButton1;
-        private System.Windows.Forms.ToolStripButton toolStripButton2;
+        private System.Windows.Forms.ToolStripButton Salvar;
+        private System.Windows.Forms.ToolStripButton Alterar;
         private System.Windows.Forms.ColumnHeader horas_inicial;
         private System.Windows.Forms.ColumnHeader horas_final;
         private System.Windows.Forms.ColumnHeader processos;
@@ -1086,9 +1249,24 @@ namespace hora_Komdelli
         private System.Windows.Forms.ColumnHeader duração;
         private System.Windows.Forms.Label lab_diferença;
         private System.Windows.Forms.Label lab_planejado;
-        private System.Windows.Forms.Label lab_executado;
         private System.Windows.Forms.Button button2;
         private System.Windows.Forms.Button button3;
+        private System.Windows.Forms.Label label16;
+        private System.Windows.Forms.Label label15;
+        private System.Windows.Forms.ComboBox comboBox1;
+        private System.Windows.Forms.TextBox textBox50;
+        private System.Windows.Forms.TextBox textBox48;
+        private System.Windows.Forms.TextBox textBox47;
+        private System.Windows.Forms.TextBox textBox46;
+        private System.Windows.Forms.TextBox textBox45;
+        private System.Windows.Forms.Label label22;
+        private System.Windows.Forms.Label label21;
+        private System.Windows.Forms.Label label20;
+        private System.Windows.Forms.Label label19;
+        private System.Windows.Forms.Label label18;
+        private System.Windows.Forms.Label label17;
+        private System.Windows.Forms.ToolStripButton Sair;
+        private System.Windows.Forms.ToolStripButton Excluir;
     }
 }
 
