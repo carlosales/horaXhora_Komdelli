@@ -126,11 +126,11 @@ namespace hora_Komdelli
             this.label13 = new System.Windows.Forms.Label();
             this.label12 = new System.Windows.Forms.Label();
             this.toolStrip1 = new System.Windows.Forms.ToolStrip();
-            this.Salvar = new System.Windows.Forms.ToolStripButton();
-            this.Alterar = new System.Windows.Forms.ToolStripButton();
-            this.openFileDialog1 = new System.Windows.Forms.OpenFileDialog();
             this.Sair = new System.Windows.Forms.ToolStripButton();
+            this.Alterar = new System.Windows.Forms.ToolStripButton();
+            this.Salvar = new System.Windows.Forms.ToolStripButton();
             this.Excluir = new System.Windows.Forms.ToolStripButton();
+            this.openFileDialog1 = new System.Windows.Forms.OpenFileDialog();
             listView1 = new System.Windows.Forms.ListView();
             this.tabControl1.SuspendLayout();
             this.INFORMAÇÃO.SuspendLayout();
@@ -1088,14 +1088,15 @@ namespace hora_Komdelli
             this.toolStrip1.TabIndex = 0;
             this.toolStrip1.Text = "toolStrip1";
             // 
-            // Salvar
+            // Sair
             // 
-            this.Salvar.Alignment = System.Windows.Forms.ToolStripItemAlignment.Right;
-            this.Salvar.Image = ((System.Drawing.Image)(resources.GetObject("Salvar.Image")));
-            this.Salvar.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.Salvar.Name = "Salvar";
-            this.Salvar.Size = new System.Drawing.Size(57, 22);
-            this.Salvar.Text = "salvar";
+            this.Sair.Alignment = System.Windows.Forms.ToolStripItemAlignment.Right;
+            this.Sair.Image = ((System.Drawing.Image)(resources.GetObject("Sair.Image")));
+            this.Sair.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.Sair.Name = "Sair";
+            this.Sair.Size = new System.Drawing.Size(46, 22);
+            this.Sair.Text = "exit";
+            this.Sair.TextDirection = System.Windows.Forms.ToolStripTextDirection.Horizontal;
             // 
             // Alterar
             // 
@@ -1106,20 +1107,15 @@ namespace hora_Komdelli
             this.Alterar.Size = new System.Drawing.Size(60, 22);
             this.Alterar.Text = "alterar";
             // 
-            // openFileDialog1
+            // Salvar
             // 
-            this.openFileDialog1.FileName = "openFileDialog1";
-            this.openFileDialog1.Filter = "Arquivos do Excel|*.xlsx;*.xlsm;*.xlsb;*.xls;*‌​.xml;\"";
-            // 
-            // Sair
-            // 
-            this.Sair.Alignment = System.Windows.Forms.ToolStripItemAlignment.Right;
-            this.Sair.Image = ((System.Drawing.Image)(resources.GetObject("Sair.Image")));
-            this.Sair.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.Sair.Name = "Sair";
-            this.Sair.Size = new System.Drawing.Size(46, 22);
-            this.Sair.Text = "exit";
-            this.Sair.TextDirection = System.Windows.Forms.ToolStripTextDirection.Horizontal;
+            this.Salvar.Alignment = System.Windows.Forms.ToolStripItemAlignment.Right;
+            this.Salvar.Image = ((System.Drawing.Image)(resources.GetObject("Salvar.Image")));
+            this.Salvar.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.Salvar.Name = "Salvar";
+            this.Salvar.Size = new System.Drawing.Size(57, 22);
+            this.Salvar.Text = "salvar";
+            this.Salvar.Click += new System.EventHandler(this.Salvar_Click);
             // 
             // Excluir
             // 
@@ -1132,6 +1128,12 @@ namespace hora_Komdelli
             this.Excluir.Name = "Excluir";
             this.Excluir.Size = new System.Drawing.Size(62, 22);
             this.Excluir.Text = "excluir";
+            this.Excluir.Click += new System.EventHandler(this.Excluir_Click);
+            // 
+            // openFileDialog1
+            // 
+            this.openFileDialog1.FileName = "openFileDialog1";
+            this.openFileDialog1.Filter = "Arquivos do Excel|*.xlsx;*.xlsm;*.xlsb;*.xls;*‌​.xml;\"";
             // 
             // Form1
             // 

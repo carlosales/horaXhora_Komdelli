@@ -222,6 +222,45 @@ namespace hora_Komdelli
                 context.SaveChanges();
             }
         }
+
+        private void Salvar_Click(object sender, EventArgs e)
+        {
+            var con = new Conexao();
+            {
+                con.parada_Cortes.AddAsync(new parada_corte
+                {
+                    duracao = textBox50.Text,
+                    justificativa = comboBox1.Text,
+                    processo = textBox47.Text,
+                    ordem = textBox48.Text,
+                    hora_final = textBox46.Text,
+                    hora_inicio = textBox45.Text  
+
+                });
+                try
+                {
+                    con.SaveChangesAsync();
+                    MessageBox.Show("dados salvos com sucesso");
+                }catch(Exception E)
+                {
+                    MessageBox.Show("erro ao salvar"+""+ E);
+                }
+               
+            }
+        }
+
+        private void Excluir_Click(object sender, EventArgs e)
+        {
+            using (var context = new Conexao())
+            {
+                var std = context.parada_Cortes.First<parada_corte>();
+                context.parada_Cortes.Remove(std);
+
+
+
+                context.SaveChanges();
+            }
+        }
     }
 
 }

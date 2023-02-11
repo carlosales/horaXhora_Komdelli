@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\carlo\\source\\repos\\carlosales\\horaXhora_Komdelli\\hora_Komdelli.csproj": {}
+    "C:\\Users\\carlo\\Source\\Repos\\carlosales\\horaXhora_Komdelli\\hora_Komdelli.csproj": {}
   },
   "projects": {
-    "C:\\Users\\carlo\\source\\repos\\carlosales\\horaXhora_Komdelli\\hora_Komdelli.csproj": {
+    "C:\\Users\\carlo\\Source\\Repos\\carlosales\\horaXhora_Komdelli\\hora_Komdelli.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\carlo\\source\\repos\\carlosales\\horaXhora_Komdelli\\hora_Komdelli.csproj",
+        "projectUniqueName": "C:\\Users\\carlo\\Source\\Repos\\carlosales\\horaXhora_Komdelli\\hora_Komdelli.csproj",
         "projectName": "hora_Komdelli",
-        "projectPath": "C:\\Users\\carlo\\source\\repos\\carlosales\\horaXhora_Komdelli\\hora_Komdelli.csproj",
+        "projectPath": "C:\\Users\\carlo\\Source\\Repos\\carlosales\\horaXhora_Komdelli\\hora_Komdelli.csproj",
         "packagesPath": "C:\\Users\\carlo\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\carlo\\source\\repos\\carlosales\\horaXhora_Komdelli\\obj\\",
+        "outputPath": "C:\\Users\\carlo\\Source\\Repos\\carlosales\\horaXhora_Komdelli\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
@@ -109,7 +109,7 @@
               "privateAssets": "none"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.101\\RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.102\\RuntimeIdentifierGraph.json"
         }
       }
     }

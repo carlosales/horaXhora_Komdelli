@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "BGewCz6TgrqBwSbzz/+Ka2hYKNiUFPn7EI92OnMwmL/W0u6Bv659JI8KL99bv42G64LqWzk8EHqkLaoFJRdAKw==",
+  "dgSpecHash": "+81/RApQtwZKnF+Vhe2rDge3VapxWJmo/J0cswCl9RujVXeFH4VNGkdoh9TpBcyp8AzkEcOl70DGs2vuaXNnYw==",
   "success": true,
-  "projectFilePath": "C:\\Users\\carlo\\source\\repos\\carlosales\\horaXhora_Komdelli\\hora_Komdelli.csproj",
+  "projectFilePath": "C:\\Users\\carlo\\Source\\Repos\\carlosales\\horaXhora_Komdelli\\hora_Komdelli.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\carlo\\.nuget\\packages\\closedxml\\0.97.0\\closedxml.0.97.0.nupkg.sha512",
     "C:\\Users\\carlo\\.nuget\\packages\\documentformat.openxml\\2.16.0\\documentformat.openxml.2.16.0.nupkg.sha512",
