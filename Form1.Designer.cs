@@ -1106,6 +1106,7 @@ namespace hora_Komdelli
             this.Alterar.Name = "Alterar";
             this.Alterar.Size = new System.Drawing.Size(60, 22);
             this.Alterar.Text = "alterar";
+            this.Alterar.Click += new System.EventHandler(this.Alterar_Click);
             // 
             // Salvar
             // 

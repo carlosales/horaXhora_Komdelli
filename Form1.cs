@@ -260,6 +260,17 @@ namespace hora_Komdelli
 
                 context.SaveChanges();
             }
+
+        }
+
+        private void Alterar_Click(object sender, EventArgs e)
+        {
+            var conex = new Conexao();
+            {
+                conex.corte_Executados.First<Corte_executado>();
+                conex.corte_Executados.Find(corte_executado);
+                conex.SaveChanges();
+            }
         }
     }
 
