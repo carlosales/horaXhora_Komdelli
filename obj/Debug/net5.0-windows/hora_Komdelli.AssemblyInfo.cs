@@ -14,7 +14,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("hora_Komdelli")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+2ca006ca33753dd20adc43337e5db6a1468bea6c")]
 [assembly: System.Reflection.AssemblyProductAttribute("hora_Komdelli")]
 [assembly: System.Reflection.AssemblyTitleAttribute("hora_Komdelli")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

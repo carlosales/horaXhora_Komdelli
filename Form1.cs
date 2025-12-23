@@ -1,25 +1,22 @@
-ï»¿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Data.Entity.Validation;
-using System.Diagnostics;
-using System.Drawing;
-using System.Linq;
-using System.Reflection.Metadata;
-using System.Text;
-using System.Threading.Tasks;
+using System;
 using System.Windows.Forms;
-using ClosedXML.Excel;
-using Microsoft.EntityFrameworkCore;
+using hora_Komdelli.Models;
+using hora_Komdelli.Services;
 
 namespace hora_Komdelli
 {
     public partial class Form1 : Form
     {
+        private readonly IProducaoService _producaoService;
+        private readonly ExcelService _excelService;
+        private readonly PdfExportService _pdfExportService;
+
         public Form1()
         {
             InitializeComponent();
+            _producaoService = new ProducaoService();
+            _excelService = new ExcelService();
+            _pdfExportService = new PdfExportService();
             //corte planejado
             textBox22.Enabled = false;
             textBox21.Enabled = false;
@@ -48,232 +45,351 @@ namespace hora_Komdelli
 
         private void Abrir_plano_Click(object sender, EventArgs e)
         {
-
-            openFileDialog1.ShowDialog();
-            openFileDialog1.CheckFileExists = true;
-            var abrirarquivo = openFileDialog1.FileName;
-            //MessageBox.Show(abrirarquivo);
-
-            var linha1 = 19;
-            var linha2 = 20;
-            var linha3 = 21;
-            var linha4 = 22;
-            var linha5 = 23;
-            var linha6 = 24;
-            var linha7 = 26;
-            var linha8 = 27;
-            var linha9 = 28;
-            var linha10 = 29;
-            var linha11 = 30;
-
-            #region   excell
             try
             {
-                var excell = new XLWorkbook(abrirarquivo);
+                openFileDialog1.Filter = "Arquivos Excel (*.xlsx;*.xls)|*.xlsx;*.xls";
+                openFileDialog1.CheckFileExists = true;
+                
+                if (openFileDialog1.ShowDialog() != DialogResult.OK)
+                    return;
 
-                var sheets = excell.Worksheet(6);
+                var caminhoArquivo = openFileDialog1.FileName;
+                var (cortePlanejado, opPlanejado) = _excelService.LerDadosPlano(caminhoArquivo);
 
-                textBox22.Text = sheets.Cell("j" + linha1.ToString()).Value.ToString();
-                textBox21.Text = sheets.Cell("j" + linha2.ToString()).Value.ToString();
-                textBox20.Text = sheets.Cell("j" + linha3.ToString()).Value.ToString();
-                textBox19.Text = sheets.Cell("j" + linha4.ToString()).Value.ToString();
-                textBox18.Text = sheets.Cell("j" + linha5.ToString()).Value.ToString();
-                textBox17.Text = sheets.Cell("j" + linha6.ToString()).Value.ToString();
-                textBox16.Text = sheets.Cell("j" + linha7.ToString()).Value.ToString();
-                textBox15.Text = sheets.Cell("j" + linha8.ToString()).Value.ToString();
-                textBox14.Text = sheets.Cell("j" + linha9.ToString()).Value.ToString();
-                textBox13.Text = sheets.Cell("j" + linha10.ToString()).Value.ToString();
-                textBox12.Text = sheets.Cell("j" + linha11.ToString()).Value.ToString();
+                // Preencher campos de corte planejado
+                textBox22.Text = cortePlanejado[0];
+                textBox21.Text = cortePlanejado[1];
+                textBox20.Text = cortePlanejado[2];
+                textBox19.Text = cortePlanejado[3];
+                textBox18.Text = cortePlanejado[4];
+                textBox17.Text = cortePlanejado[5];
+                textBox16.Text = cortePlanejado[6];
+                textBox15.Text = cortePlanejado[7];
+                textBox14.Text = cortePlanejado[8];
+                textBox13.Text = cortePlanejado[9];
+                textBox12.Text = cortePlanejado[10];
 
-                textBox44.Text = sheets.Cell("I" + linha1.ToString()).Value.ToString();
-                textBox43.Text = sheets.Cell("I" + linha2.ToString()).Value.ToString();
-                textBox42.Text = sheets.Cell("I" + linha3.ToString()).Value.ToString();
-                textBox41.Text = sheets.Cell("I" + linha4.ToString()).Value.ToString();
-                textBox40.Text = sheets.Cell("I" + linha5.ToString()).Value.ToString();
-                textBox39.Text = sheets.Cell("I" + linha6.ToString()).Value.ToString();
-                textBox38.Text = sheets.Cell("I" + linha7.ToString()).Value.ToString();
-                textBox37.Text = sheets.Cell("I" + linha8.ToString()).Value.ToString();
-                textBox36.Text = sheets.Cell("I" + linha9.ToString()).Value.ToString();
-                textBox35.Text = sheets.Cell("I" + linha10.ToString()).Value.ToString();
-                textBox34.Text = sheets.Cell("I" + linha11.ToString()).Value.ToString();
+                // Preencher campos de OP planejado
+                textBox44.Text = opPlanejado[0];
+                textBox43.Text = opPlanejado[1];
+                textBox42.Text = opPlanejado[2];
+                textBox41.Text = opPlanejado[3];
+                textBox40.Text = opPlanejado[4];
+                textBox39.Text = opPlanejado[5];
+                textBox38.Text = opPlanejado[6];
+                textBox37.Text = opPlanejado[7];
+                textBox36.Text = opPlanejado[8];
+                textBox35.Text = opPlanejado[9];
+                textBox34.Text = opPlanejado[10];
 
-                //textBox22.Text = sheets.Cell("L").GetString();
-                //var result = new String[] { textBox12.Text +textBox13.Text +textBox14.Text +textBox15.Text + textBox16.Text +textBox17.Text +textBox18.Text +textBox19.Text +textBox20.Text +textBox21.Text +textBox22.Text };
-                //MessageBox.Show(result.ToString());
+                MessageBox.Show("Dados carregados com sucesso!", "Sucesso", MessageBoxButtons.OK, MessageBoxIcon.Information);
             }
-            catch (Exception E)
+            catch (Exception ex)
             {
-                MessageBox.Show("erro ao carrega os dados" + E);
+                MessageBox.Show($"Erro ao carregar os dados: {ex.Message}", "Erro", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
-            finally
-            {
-
-                //Application.Exit();
-            }
-
-
         }
-        #endregion
-        private void button1_Click(object sender, EventArgs e)
+        private async void button1_Click(object sender, EventArgs e)
         {
-            #region conexÃ£o,salvando banco de dados
-
-            var Db = new Conexao();
+            try
             {
-               // var teste = new Corte_executado()
-               Db.corte_Executados.AddAsync(new Corte_executado
+                var corteExecutado = new CorteExecutado
                 {
-                    primeiro = textBox1.Text,
-                    segundo = textBox2.Text,
-                    terceiro = textBox3.Text,
-                    quarto = textBox4.Text,
-                    quinto = textBox5.Text,
-                    sexto = textBox6.Text,
-                    setimo = textBox7.Text,
-                    oitavo = textBox8.Text,
-                    nono = textBox9.Text,
-                    decimo = textBox10.Text,
-                    decimo_primeiro = textBox11.Text
-                });
+                    Hora1 = textBox1.Text,
+                    Hora2 = textBox2.Text,
+                    Hora3 = textBox3.Text,
+                    Hora4 = textBox4.Text,
+                    Hora5 = textBox5.Text,
+                    Hora6 = textBox6.Text,
+                    Hora7 = textBox7.Text,
+                    Hora8 = textBox8.Text,
+                    Hora9 = textBox9.Text,
+                    Hora10 = textBox10.Text,
+                    Hora11 = textBox11.Text
+                };
 
-                Db.corte_Planejados.AddAsync(new Corte_planejado
+                var cortePlanejado = new CortePlanejado
                 {
-                    primeiro = textBox22.Text,
-                    segundo = textBox21.Text,
-                    terceiro = textBox20.Text,
-                    quarto = textBox19.Text,
-                    quinto = textBox18.Text,
-                    sexto = textBox17.Text,
-                    setimo = textBox16.Text,
-                    oitavo = textBox15.Text,
-                    nono = textBox14.Text,
-                    decimo = textBox13.Text,
-                    decimo_primeiro = textBox12.Text
-                });
-                Db.op_Executados.AddAsync(new Op_executado
-                {
-                    primeiro = textBox33.Text,
-                    segundo = textBox32.Text,
-                    terceiro = textBox31.Text,
-                    quarto = textBox30.Text,
-                    quinto = textBox29.Text,
-                    sexto = textBox28.Text,
-                    setimo = textBox27.Text,
-                    oitavo = textBox26.Text,
-                    nono = textBox25.Text,
-                    decimo = textBox24.Text,
-                    decimo_primeiro = textBox23.Text
-                });
+                    Hora1 = textBox22.Text,
+                    Hora2 = textBox21.Text,
+                    Hora3 = textBox20.Text,
+                    Hora4 = textBox19.Text,
+                    Hora5 = textBox18.Text,
+                    Hora6 = textBox17.Text,
+                    Hora7 = textBox16.Text,
+                    Hora8 = textBox15.Text,
+                    Hora9 = textBox14.Text,
+                    Hora10 = textBox13.Text,
+                    Hora11 = textBox12.Text
+                };
 
-                Db.op_Planejados.AddAsync(new Op_planejado
+                var opExecutado = new OpExecutado
                 {
-                    primeiro = textBox44.Text,
-                    segundo = textBox43.Text,
-                    terceiro = textBox42.Text,
-                    quarto = textBox41.Text,
-                    quinto = textBox40.Text,
-                    sexto = textBox39.Text,
-                    setimo = textBox38.Text,
-                    oitavo = textBox37.Text,
-                    nono = textBox36.Text,
-                    decimo = textBox35.Text,
-                    decimo_primeiro = textBox34.Text
-                });
-               
-                try
+                    Hora1 = textBox33.Text,
+                    Hora2 = textBox32.Text,
+                    Hora3 = textBox31.Text,
+                    Hora4 = textBox30.Text,
+                    Hora5 = textBox29.Text,
+                    Hora6 = textBox28.Text,
+                    Hora7 = textBox27.Text,
+                    Hora8 = textBox26.Text,
+                    Hora9 = textBox25.Text,
+                    Hora10 = textBox24.Text,
+                    Hora11 = textBox23.Text
+                };
+
+                var opPlanejado = new OpPlanejado
                 {
-                    Db.SaveChangesAsync();
-                    MessageBox.Show("salvo com sucesso");
+                    Hora1 = textBox44.Text,
+                    Hora2 = textBox43.Text,
+                    Hora3 = textBox42.Text,
+                    Hora4 = textBox41.Text,
+                    Hora5 = textBox40.Text,
+                    Hora6 = textBox39.Text,
+                    Hora7 = textBox38.Text,
+                    Hora8 = textBox37.Text,
+                    Hora9 = textBox36.Text,
+                    Hora10 = textBox35.Text,
+                    Hora11 = textBox34.Text
+                };
+
+                var sucesso1 = await _producaoService.SalvarCorteExecutadoAsync(corteExecutado);
+                var sucesso2 = await _producaoService.SalvarCortePlanejadoAsync(cortePlanejado);
+                var sucesso3 = await _producaoService.SalvarOpExecutadoAsync(opExecutado);
+                var sucesso4 = await _producaoService.SalvarOpPlanejadoAsync(opPlanejado);
+
+                if (sucesso1 && sucesso2 && sucesso3 && sucesso4)
+                {
+                    MessageBox.Show("Dados salvos com sucesso!", "Sucesso", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    LimparCampos();
                 }
-                catch (Exception E)
+                else
                 {
-                    MessageBox.Show("problema ao salvar"+ E);
+                    MessageBox.Show("Erro ao salvar alguns dados.", "Erro", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 }
             }
-           
+            catch (Exception ex)
+            {
+                MessageBox.Show($"Erro ao salvar: {ex.Message}", "Erro", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
 
-            #endregion
-
-
+        private void LimparCampos()
+        {
+            // Limpar corte executado
+            textBox1.Clear(); textBox2.Clear(); textBox3.Clear(); textBox4.Clear();
+            textBox5.Clear(); textBox6.Clear(); textBox7.Clear(); textBox8.Clear();
+            textBox9.Clear(); textBox10.Clear(); textBox11.Clear();
+            
+            // Limpar OP executado
+            textBox23.Clear(); textBox24.Clear(); textBox25.Clear(); textBox26.Clear();
+            textBox27.Clear(); textBox28.Clear(); textBox29.Clear(); textBox30.Clear();
+            textBox31.Clear(); textBox32.Clear(); textBox33.Clear();
         }
 
         private void button2_Click(object sender, EventArgs e)
         {
-            var conex = new Conexao();
-         {
-             conex.corte_Executados.First<Corte_executado>();
-            conex.corte_Executados.Find(corte_executado);
-            conex.SaveChanges();
+            MessageBox.Show("Funcionalidade de alteração será implementada com seleção de registros.", 
+                "Em desenvolvimento", MessageBoxButtons.OK, MessageBoxIcon.Information);
         }
-
-
-
-    }
 
         private void button3_Click(object sender, EventArgs e)
         {
-            using (var context = new Conexao())
+            MessageBox.Show("Funcionalidade de exclusão será implementada com seleção de registros.", 
+                "Em desenvolvimento", MessageBoxButtons.OK, MessageBoxIcon.Information);
+        }
+
+        private async void Salvar_Click(object sender, EventArgs e)
+        {
+            try
             {
-                var std = context.corte_Executados.First<Corte_executado>();
-                context.corte_Executados.Remove(std);
+                if (string.IsNullOrWhiteSpace(textBox45.Text) || 
+                    string.IsNullOrWhiteSpace(textBox46.Text) ||
+                    string.IsNullOrWhiteSpace(textBox47.Text) ||
+                    string.IsNullOrWhiteSpace(comboBox1.Text))
+                {
+                    MessageBox.Show("Por favor, preencha todos os campos obrigatórios.", 
+                        "Validação", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    return;
+                }
 
-                
+                var parada = new ParadaCorte
+                {
+                    HoraInicio = textBox45.Text,
+                    HoraFinal = textBox46.Text,
+                    Processo = textBox47.Text,
+                    Ordem = textBox48.Text,
+                    Justificativa = comboBox1.Text,
+                    Duracao = textBox50.Text
+                };
 
-                context.SaveChanges();
+                var sucesso = await _producaoService.SalvarParadaCorteAsync(parada);
+
+                if (sucesso)
+                {
+                    MessageBox.Show("Parada salva com sucesso!", "Sucesso", 
+                        MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    LimparCamposParada();
+                }
+                else
+                {
+                    MessageBox.Show("Erro ao salvar parada.", "Erro", 
+                        MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"Erro ao salvar: {ex.Message}", "Erro", 
+                    MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
 
-        private void Salvar_Click(object sender, EventArgs e)
+        private void LimparCamposParada()
         {
-            var con = new Conexao();
-            {
-                con.parada_Cortes.AddAsync(new parada_corte
-                {
-                    duracao = textBox50.Text,
-                    justificativa = comboBox1.Text,
-                    processo = textBox47.Text,
-                    ordem = textBox48.Text,
-                    hora_final = textBox46.Text,
-                    hora_inicio = textBox45.Text  
-
-                });
-                try
-                {
-                    con.SaveChangesAsync();
-                    MessageBox.Show("dados salvos com sucesso");
-                }catch(Exception E)
-                {
-                    MessageBox.Show("erro ao salvar"+""+ E);
-                }
-               
-            }
+            textBox45.Clear();
+            textBox46.Clear();
+            textBox47.Clear();
+            textBox48.Clear();
+            textBox50.Clear();
+            comboBox1.SelectedIndex = -1;
         }
 
         private void Excluir_Click(object sender, EventArgs e)
         {
-            using (var context = new Conexao())
-            {
-                var std = context.parada_Cortes.First<parada_corte>();
-                context.parada_Cortes.Remove(std);
-
-
-
-                context.SaveChanges();
-            }
-
+            MessageBox.Show("Funcionalidade de exclusão será implementada com seleção de registros.", 
+                "Em desenvolvimento", MessageBoxButtons.OK, MessageBoxIcon.Information);
         }
 
         private void Alterar_Click(object sender, EventArgs e)
         {
-            var conex = new Conexao();
+            MessageBox.Show("Funcionalidade de alteração será implementada com seleção de registros.", 
+                "Em desenvolvimento", MessageBoxButtons.OK, MessageBoxIcon.Information);
+        }
+
+        private async void ExportarPdfProducao_Click(object sender, EventArgs e)
+        {
+            try
             {
-                conex.corte_Executados.First<Corte_executado>();
-                conex.corte_Executados.Find(corte_executado);
-                conex.SaveChanges();
+                var saveDialog = new SaveFileDialog
+                {
+                    Filter = "Arquivos PDF (*.pdf)|*.pdf",
+                    DefaultExt = "pdf",
+                    FileName = $"Relatorio_Producao_{DateTime.Now:yyyyMMdd_HHmmss}.pdf"
+                };
+
+                if (saveDialog.ShowDialog() != DialogResult.OK)
+                    return;
+
+                var cortesExecutados = await _producaoService.ObterTodosCortesExecutadosAsync();
+                var cortesPlanejados = await _producaoService.ObterTodosCortesPlanejadosAsync();
+                var opsExecutados = await _producaoService.ObterTodosOpsExecutadosAsync();
+                var opsPlanejados = await _producaoService.ObterTodosOpsPlanejadosAsync();
+
+                _pdfExportService.ExportarRelatorioProducao(
+                    cortesExecutados,
+                    cortesPlanejados,
+                    opsExecutados,
+                    opsPlanejados,
+                    saveDialog.FileName);
+
+                MessageBox.Show("Relatório PDF gerado com sucesso!", "Sucesso", 
+                    MessageBoxButtons.OK, MessageBoxIcon.Information);
+
+                var result = MessageBox.Show("Deseja abrir o arquivo PDF?", "Abrir PDF", 
+                    MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+                
+                if (result == DialogResult.Yes)
+                {
+                    System.Diagnostics.Process.Start(new System.Diagnostics.ProcessStartInfo
+                    {
+                        FileName = saveDialog.FileName,
+                        UseShellExecute = true
+                    });
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"Erro ao gerar PDF: {ex.Message}", "Erro", 
+                    MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
+
+        private async void ExportarPdfParadas_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                var saveDialog = new SaveFileDialog
+                {
+                    Filter = "Arquivos PDF (*.pdf)|*.pdf",
+                    DefaultExt = "pdf",
+                    FileName = $"Relatorio_Paradas_{DateTime.Now:yyyyMMdd_HHmmss}.pdf"
+                };
+
+                if (saveDialog.ShowDialog() != DialogResult.OK)
+                    return;
+
+                var paradas = await _producaoService.ObterTodasParadasCortesAsync();
+
+                _pdfExportService.ExportarRelatorioParadas(paradas, saveDialog.FileName);
+
+                MessageBox.Show("Relatório de paradas PDF gerado com sucesso!", "Sucesso", 
+                    MessageBoxButtons.OK, MessageBoxIcon.Information);
+
+                var result = MessageBox.Show("Deseja abrir o arquivo PDF?", "Abrir PDF", 
+                    MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+                
+                if (result == DialogResult.Yes)
+                {
+                    System.Diagnostics.Process.Start(new System.Diagnostics.ProcessStartInfo
+                    {
+                        FileName = saveDialog.FileName,
+                        UseShellExecute = true
+                    });
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"Erro ao gerar PDF: {ex.Message}", "Erro", 
+                    MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
+
+        private void ExportarPdfCompleto_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                var saveDialog = new SaveFileDialog
+                {
+                    Filter = "Arquivos PDF (*.pdf)|*.pdf",
+                    DefaultExt = "pdf",
+                    FileName = $"Relatorio_Completo_{DateTime.Now:yyyyMMdd_HHmmss}.pdf"
+                };
+
+                if (saveDialog.ShowDialog() != DialogResult.OK)
+                    return;
+
+                _pdfExportService.ExportarRelatorioCompleto(saveDialog.FileName);
+
+                MessageBox.Show("Relatório completo PDF gerado com sucesso!", "Sucesso", 
+                    MessageBoxButtons.OK, MessageBoxIcon.Information);
+
+                var result = MessageBox.Show("Deseja abrir o arquivo PDF?", "Abrir PDF", 
+                    MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+                
+                if (result == DialogResult.Yes)
+                {
+                    System.Diagnostics.Process.Start(new System.Diagnostics.ProcessStartInfo
+                    {
+                        FileName = saveDialog.FileName,
+                        UseShellExecute = true
+                    });
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"Erro ao gerar PDF: {ex.Message}", "Erro", 
+                    MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
     }
-
 }
-
-
